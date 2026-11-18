@@ -1,6 +1,9 @@
 package part01;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class CommitIds {
 
@@ -38,6 +41,15 @@ public class CommitIds {
          * Note also, that if the given commitLog is empty, you must return an empty
          * collection.
          */
-        return null;
+
+        List <String> idLista = new ArrayList<>();
+
+        for (String lause : commitLog.split("\n")){
+            if (lause.startsWith("Commit")){
+                String[] osat = lause.split(" ");
+                idLista.add(osat[1]);
+            }
+        }
+        return idLista;
     }
 }
