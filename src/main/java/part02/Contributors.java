@@ -1,6 +1,10 @@
 package part02;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 
 public class Contributors {
@@ -24,7 +28,16 @@ public class Contributors {
     public Collection<String> getContributors(String commitLog) {
         // Like in the previous exercise, you need to return an instance of some class
         // that implements the Collection interface. The choice is yours.
-        return null;
+
+        HashSet <String> nimiLista = new HashSet<>();
+
+        for (String lause : commitLog.split("\n")){
+            if (lause.contains("by")){
+                String[] osat = lause.split(" ");
+                nimiLista.add(osat[3]);
+            }
+        }
+        return nimiLista;
     }
 
     /**
@@ -48,6 +61,23 @@ public class Contributors {
      * @return a map containing the commit ids grouped by contributor
      */
     public Map<String, Collection<String>> groupCommitIdsByContributors(String commitLog) {
-        return null;
+
+        HashMap<String, Collection<String>> jokuLista = new HashMap<String, Collection<String>>();
+
+        for (String lause : commitLog.split("\n")){
+            if (lause.startsWith("Commit")){
+                String[] osat = lause.split(" ");
+                String nimi = osat[3];
+                String id = osat[1];
+
+                if (!jokuLista.containsKey(nimi)){
+                    jokuLista.put(nimi, new ArrayList<String>());
+                }
+
+                jokuLista.get(nimi).add(id);
+            }
+            
+        }
+        return jokuLista;
     }
 }
